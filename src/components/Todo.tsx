@@ -8,11 +8,24 @@ const todoReducer = (state: TodoProps[], action: Actions): TodoProps[] => {
         case "ADD":
             const newTodo: TodoProps = {
                 id: Date.now(),
-                text: action.payload
+                text: action.payload,
+                completed: false
             };
             return [...state, newTodo];
         case "DELETE":
             return state.filter(todo => todo.id !== action.payload);
+        case "EDIT": 
+            return state.map(todo => 
+                todo.id === action.payload.id 
+                ? { ...todo, text: action.payload.newText } 
+                : todo
+            );
+        case "COMPLETE":       
+            return state.map(todo => 
+                todo.id === action.payload 
+                ? { ...todo, completed: !todo.completed } 
+                : todo
+            );
         default:
             return state;
     }

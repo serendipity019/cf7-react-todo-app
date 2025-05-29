@@ -23,7 +23,7 @@ const TodoForm = ({dispatch}: todoFormProps) => {
              placeholder="New task..."
              value={text}
              onChange={handleChange} />
-            <button type="submit" className="bg-cf-dark-grey text-white px-4 py-2 rounded">Add</button>
+            <button type="submit" className="bg-cf-dark-gray text-white px-4 py-2 rounded">Add</button>
         </form>
         </>
     ) 
