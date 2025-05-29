@@ -1,4 +1,4 @@
-@import "tailwind" ;
+@import "tailwindcss" ;
 
 @theme {
   --color-cf-dark-red: #782024;
