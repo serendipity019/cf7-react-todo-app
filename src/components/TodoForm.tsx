@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import type { todoFormProps } from '../types';
 
-const TodoForm = ({dispatch}: todoFormProps) => { 
+const TodoForm = ({dispatch, inputRef}: todoFormProps) => { 
     const [text, setText] = useState("");
+
+    // const inputRef = useRef<HTMLInputElement>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value);
@@ -13,8 +15,11 @@ const TodoForm = ({dispatch}: todoFormProps) => {
         if (text.trim() !== "") {
             dispatch({ type: "ADD", payload: text });
             setText(""); // Clear the input field after submission
+            inputRef.current?.focus(); // Refocus the input field after submission
         }
     }
+
+    
     
     return (
         <>
@@ -22,7 +27,8 @@ const TodoForm = ({dispatch}: todoFormProps) => {
             <input type="text" className="flex-1 border p-2 rounded "
              placeholder="New task..."
              value={text}
-             onChange={handleChange} />
+             onChange={handleChange}
+             ref={inputRef} />
             <button type="submit" className="bg-cf-dark-gray text-white px-4 py-2 rounded">Add</button>
         </form>
         </>

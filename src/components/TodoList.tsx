@@ -1,13 +1,15 @@
 import type { TodoListProps } from '../types';
 import { Trash2, Edit, Save, X, Square, SquareCheckBig } from 'lucide-react';
-import { useState } from 'react';
+import { useState} from 'react';
 
-const TodoList = ({todos, dispatch}: TodoListProps) => {
+const TodoList = ({todos, dispatch, inputRef}: TodoListProps) => {
     const [editId, setEditId] = useState<number | null>(null);
     const [editText, setEditText] = useState<string>("");
+    
 
     const handleDelete = (id: number) => () => {
         dispatch({ type: "DELETE", payload: id });
+        inputRef.current?.focus();
     };
 
     const handleEdit = (id: number, text: string) => () => {
@@ -18,6 +20,7 @@ const TodoList = ({todos, dispatch}: TodoListProps) => {
     const handleCancel = () => {
         setEditId(null);
         setEditText("");
+        inputRef.current?.focus();
     }
 
     const handleSave = (id: number) => () => { 
@@ -25,11 +28,13 @@ const TodoList = ({todos, dispatch}: TodoListProps) => {
             dispatch({ type: "EDIT", payload: { id, newText: editText } });
             setEditId(null);
             setEditText("");
+            inputRef.current?.focus();
         }
     }
 
     const handleToggle = (id: number) => () => {
         dispatch({ type: "COMPLETE", payload: id });
+        inputRef.current?.focus();
     };
     
     return (

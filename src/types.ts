@@ -24,6 +24,8 @@ export type Todo = {
 export type TodoListProps = {
     todos: Todo[];
     dispatch: React.Dispatch<Actions>;
+    inputRef: React.RefObject<HTMLInputElement | null>; 
 }
 
-export type todoFormProps = { dispatch: React.Dispatch<Actions> }
+export type todoFormProps = { dispatch: React.Dispatch<Actions>,
+     inputRef: React.RefObject<HTMLInputElement | null>; }
